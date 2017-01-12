@@ -1,19 +1,16 @@
-#include <windows.h>
-#include <iostream>
-#include <conio.h>
-#include <stdio.h>
-#include <time.h>
-#include <thread>
-#include <mutex>
 #include <WinSock2.h>
-#include <Windows.h>
-#include <WS2tcpip.h>
 #include <stdlib.h>
+#include <iostream>
+#include <WS2tcpip.h>
+#include <Windows.h>
+#include <stdio.h>
 
-using namespace std;
-#pragma comment (lib, "Ws2_32.lib")
+#pragma comment(lib,"Ws2_32.lib")
 
-using namespace std;
+using std::cout;
+using std::cin;
+
+/*
 mutex m;
 
 #define ARRIBA     72      // CONSTANTS AMB LES FLETXES DEL TECLAT
@@ -100,7 +97,8 @@ char mapa[50][100] = {
 	"                  DXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXC",
 };
 
-
+*/
+/*
 void pintar_mapa()// Funcio que imprimeix el mapa basant-se en el mapa codificat
 {
 	for (int i = 0; i < 78; i++) {
@@ -258,9 +256,6 @@ void moureFantasma(fantasma* ghost, float random) {
 	m.lock();
 	int bolx = ghost->_x, boly = ghost->_y;
 
-	/*	if (mapa[ghost->_y][ghost->_x] == '|') {
-	ghost->fdir = rand1;
-	}*/
 
 	if (mapa[ghost->_y][ghost->_x] == '*') {
 		ghost->fdir = 0;
@@ -333,8 +328,8 @@ void marcador() {
 	gotoxy(70, 27); printf("%c", 169);
 	m.unlock();
 
-}
-int  main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
+}*/
+void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
@@ -359,7 +354,10 @@ int  main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 
 	WSACleanup();
 
-	fantasma ghostA = inicialitzarFantasma(41, 14, 2);
+	system("pause");
+}
+
+/*	fantasma ghostA = inicialitzarFantasma(41, 14, 2);
 	fantasma ghostB = inicialitzarFantasma(43, 14, 3);
 	fantasma ghostC = inicialitzarFantasma(40, 14, 4);
 	fantasma ghostD = inicialitzarFantasma(39, 14, 5);
@@ -396,7 +394,5 @@ int  main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	for (int i = 0; i <= vides; i++) {
 		gotoxy(5, i + 27);
 		printf(" ");
-	}
-	system("pause>NULL");
-	return 0;
-}
+	}*/
+
