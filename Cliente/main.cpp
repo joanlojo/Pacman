@@ -6,9 +6,7 @@
 #include <stdio.h>
 
 #pragma comment(lib,"Ws2_32.lib")
-
-using std::cout;
-using std::cin;
+using namespace std;
 
 /*
 mutex m;
@@ -343,11 +341,13 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
-	getaddrinfo("192.168.1.39", "4539", &hints, &addr);
+	getaddrinfo("192.168.1.34", "459", &hints, &addr);
 
 	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
+
 	send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
+
 
 	shutdown(sock, 1);
 	closesocket(sock);
