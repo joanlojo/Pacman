@@ -5,6 +5,13 @@
 #include <time.h>
 #include <thread>
 #include <mutex>
+#include <WinSock2.h>
+#include <Windows.h>
+#include <WS2tcpip.h>
+#include <stdlib.h>
+
+using namespace std;
+#pragma comment (lib, "Ws2_32.lib")
 
 using namespace std;
 mutex m;
@@ -327,10 +334,38 @@ void marcador() {
 	m.unlock();
 
 }
+void server() {
+	WSAData wsaData;
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
+
+	struct addrinfo addrInit;
+	struct addrinfo *addrSender;
+	struct addrinfo *addrDest;
+
+	char bufer[512];
+	ZeroMemory(&addrInit, sizeof(addrInit));
+	addrInit.ai_family = AF_INET;
+	addrInit.ai_socktype = SOCK_STREAM;
+	addrInit.ai_flags = AI_PASSIVE;
+	addrInit.ai_protocol = IPPROTO_TCP;
+
+	getaddrinfo(NULL, "5219", &addrInit, &addrDest);
+
+
+	SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	bind(sock, addrDest->ai_addr, addrDest->ai_addrlen);
+	listen(sock, 1); // 1 = numero de conexiones permitidas
+	SOCKET socKrec = accept(sock, NULL, NULL);
+
+	int i = recv(socKrec, bufer, 512, 0);
+	bufer[i - 1] = '\0';
+	cout << bufer;
+	shutdown(socKrec, SD_RECEIVE);
+	closesocket(socKrec);
+	WSACleanup();
+}
 
 int main() {
-	
-
 
 	fantasma ghostA = inicialitzarFantasma(41, 14, 2); 
 	fantasma ghostB = inicialitzarFantasma(43, 14, 3);
@@ -366,15 +401,10 @@ int main() {
 
 		Sleep(110);
 	}
-
-
-
-
 	for (int i = 0; i <= vides; i++) {
 		gotoxy(5, i + 27);
 		printf(" ");
 	}
-
 	system("pause>NULL");
 	return 0;
 }
