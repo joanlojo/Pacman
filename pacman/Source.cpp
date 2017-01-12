@@ -21,7 +21,7 @@ void server() {
 	addrInit.ai_flags = AI_PASSIVE;
 	addrInit.ai_protocol = IPPROTO_TCP;
 
-	getaddrinfo(NULL, "5219", &addrInit, &addrDest);
+	getaddrinfo(NULL, "4539", &addrInit, &addrDest);
 
 
 	SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);

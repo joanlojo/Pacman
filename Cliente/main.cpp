@@ -336,14 +336,14 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 
 	struct addrinfo *addr;
 	struct addrinfo hints;
-	const char bufer[] = "SEND NUDES <3";
+	const char bufer[] = "hola valen";
 	ZeroMemory(&hints, sizeof(hints));
 
 	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
-	getaddrinfo("192.168.123.51", "5219", &hints, &addr);
+	getaddrinfo("192.168.1.39", "4539", &hints, &addr);
 
 	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
