@@ -28,10 +28,23 @@ void server() {
 	bind(sock, addrDest->ai_addr, addrDest->ai_addrlen);
 	listen(sock, 1); // 1 = numero de conexiones permitidas
 	SOCKET socKrec = accept(sock, NULL, NULL);
+	if (accept) {
+		cout << "INFO: Accept correct" << endl;
+	}
+	else {
+		cout << "INFO: Acept wrong" << endl;
+	}
 
 	int i = recv(socKrec, bufer, 512, 0);
 	bufer[i - 1] = '\0';
-	cout << bufer;
+	if (recv) {
+		cout << "INFO: Recv correct" << endl;
+		cout << bufer << endl;
+	}
+	else {
+		cout << "INFO: Recv wrong" << endl;
+	}
+	//cout << bufer << endl;
 	shutdown(socKrec, SD_RECEIVE);
 	closesocket(socKrec);
 	WSACleanup();
