@@ -298,34 +298,6 @@ void moureFantasma(fantasma* ghost, float random) {
 	pintarFantasma(ghost);
 	m.unlock();
 }
-
-void cliente() {
-	WSAData wsaData;
-	WSAStartup(MAKEWORD(2, 2), &wsaData);
-
-
-	struct addrinfo *addr;
-	struct addrinfo hints;
-	const char bufer[] = "hola valen";
-	ZeroMemory(&hints, sizeof(hints));
-
-	hints.ai_family = AF_INET;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_protocol = IPPROTO_TCP;
-
-	getaddrinfo("192.168.1.34", "459", &hints, &addr);
-
-	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	connect(sock, addr->ai_addr, addr->ai_addrlen);
-
-	send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
-
-
-	shutdown(sock, 2);
-	closesocket(sock);
-
-	WSACleanup();
-}
 void marcador() {
 	m.lock();
 
@@ -352,6 +324,38 @@ void marcador() {
 	setCColor(color[2]);
 	gotoxy(70, 27); printf("%c", 169);
 	m.unlock();
+}
+void cliente() {
+	WSAData wsaData;
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
+
+
+	struct addrinfo *addr;
+	struct addrinfo hints;
+	const char bufer[] = "Hola";
+	ZeroMemory(&hints, sizeof(hints));
+
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_protocol = IPPROTO_TCP;
+
+	getaddrinfo("192.168.1.34", "459", &hints, &addr);
+
+	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	connect(sock, addr->ai_addr, addr->ai_addrlen);
+
+	send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
+
+
+	shutdown(sock, 2);
+	closesocket(sock);
+
+	WSACleanup();
+}
+void registro() {
+	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
+	char name[10];
+	cin >> name;
 }
 void Menu(int *a) {
 	//int a;
@@ -391,41 +395,47 @@ void GameLoop(fantasma *f1, fantasma *f2, fantasma *f3, fantasma *f4) {
 }
 void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	int a = 0;
-	Menu(&a);
-	if (a == 1) {
-		fantasma ghostA = inicialitzarFantasma(41, 14, 2);
-		fantasma ghostB = inicialitzarFantasma(43, 14, 3);
-		fantasma ghostC = inicialitzarFantasma(40, 14, 4);
-		fantasma ghostD = inicialitzarFantasma(39, 14, 5);
-		pintar_mapa();
-		fantasma* f1 = &ghostA;
-		fantasma* f2 = &ghostB;
-		fantasma* f3 = &ghostC;
-		fantasma* f4 = &ghostD;
-		while (vides > 0 && punts < 1950) {
-			GameLoop(f1, f2, f3, f4);
+	for (;;) {
+		Menu(&a);
+
+		if (a == 1) {
+			fantasma ghostA = inicialitzarFantasma(41, 14, 2);
+			fantasma ghostB = inicialitzarFantasma(43, 14, 3);
+			fantasma ghostC = inicialitzarFantasma(40, 14, 4);
+			fantasma ghostD = inicialitzarFantasma(39, 14, 5);
+			pintar_mapa();
+			fantasma* f1 = &ghostA;
+			fantasma* f2 = &ghostB;
+			fantasma* f3 = &ghostC;
+			fantasma* f4 = &ghostD;
+			while (vides > 0 && punts < 1950) {
+				GameLoop(f1, f2, f3, f4);
+			}
+			for (int i = 0; i <= vides; i++) {
+				gotoxy(5, i + 27);
+				printf(" ");
+			}
+			if (vides == 0) {
+				cliente();
+				vides = 3;
+				Menu(&a);
+			}
 		}
-		for (int i = 0; i <= vides; i++) {
-			gotoxy(5, i + 27);
-			printf(" ");
-		}
-		if (vides == 0) {
-			cliente();
-			vides = 3;
+		else if (a == 2) {
+			cout << "hola" << endl;
 			Menu(&a);
 		}
-	}
-	else if (a == 2) {
-		 cout << "hola" << endl;
-	}
-	else if (a == 3) {
-	 cout << "hola" << endl;
-	}
-	else if (a == 4) {
-		 cout << "hola" << endl;
-	}
-	else if (a == 5) {
-		 exit(0);
+		else if (a == 3) {
+			cout << "hola" << endl;
+			Menu(&a);
+		}
+		else if (a == 4) {
+			cout << "hola" << endl;
+			Menu(&a);
+		}
+		else if (a == 5) {
+			exit(0);
+		}
 	}
 	system("pause");
 }
