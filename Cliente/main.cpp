@@ -411,6 +411,7 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 		}
 		if (vides == 0) {
 			cliente();
+			vides = 3;
 			Menu(&a);
 		}
 	}
