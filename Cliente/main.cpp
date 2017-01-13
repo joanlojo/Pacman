@@ -4,11 +4,14 @@
 #include <WS2tcpip.h>
 #include <Windows.h>
 #include <stdio.h>
-
+//#include <windows.h>
+#include <conio.h>
+#include <time.h>
+#include <thread>
+#include <mutex>
 #pragma comment(lib,"Ws2_32.lib")
 using namespace std;
 
-/*
 mutex m;
 
 #define ARRIBA     72      // CONSTANTS AMB LES FLETXES DEL TECLAT
@@ -95,8 +98,6 @@ char mapa[50][100] = {
 	"                  DXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXC",
 };
 
-*/
-/*
 void pintar_mapa()// Funcio que imprimeix el mapa basant-se en el mapa codificat
 {
 	for (int i = 0; i < 78; i++) {
@@ -298,7 +299,33 @@ void moureFantasma(fantasma* ghost, float random) {
 	m.unlock();
 }
 
+void cliente() {
+	WSAData wsaData;
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
+
+	struct addrinfo *addr;
+	struct addrinfo hints;
+	const char bufer[] = "hola valen";
+	ZeroMemory(&hints, sizeof(hints));
+
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_protocol = IPPROTO_TCP;
+
+	getaddrinfo("192.168.1.34", "459", &hints, &addr);
+
+	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	connect(sock, addr->ai_addr, addr->ai_addrlen);
+
+	send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
+
+
+	shutdown(sock, 2);
+	closesocket(sock);
+
+	WSACleanup();
+}
 void marcador() {
 	m.lock();
 
@@ -325,74 +352,84 @@ void marcador() {
 	setCColor(color[2]);
 	gotoxy(70, 27); printf("%c", 169);
 	m.unlock();
+}
+void Menu(int *a) {
+	//int a;
+	cout << "Menu Principal" << endl;
+	cout << endl << endl;
+	cout << "Selecciona que quieres hacer" << endl;
+	cout << "1 -- Jugar" << endl;
+	cout << "2 -- Consultar Ranking" << endl;
+	cout << "3 -- Consultar mejores puntiaciones" << endl;
+	cout << "4 -- Achivments" << endl;
+	cout << "5 -- Salir" << endl;
+	cin >> *a;
+	//return a;
+}
+void GameLoop(fantasma *f1, fantasma *f2, fantasma *f3, fantasma *f4) {
+	srand(time(NULL));
+	thread M = thread(marcador);
+	thread Pacman = thread(mourePacman);
+	thread F1 = thread(moureFantasma, f1, rand() % 4);
+	thread F2 = thread(moureFantasma, f2, rand() % 4);
+	thread F3 = thread(moureFantasma, f3, rand() % 4);
+	thread F4 = thread(moureFantasma, f4, rand() % 4);
 
-}*/
+	M.join();
+	xocPacman(f1);
+	xocPacman(f2);
+	xocPacman(f3);
+	xocPacman(f4);
+	Pacman.join();
+
+	F1.join();
+	F2.join();
+	F3.join();
+	F4.join();
+
+	Sleep(110);
+}
 void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
-	WSAData wsaData;
-	WSAStartup(MAKEWORD(2, 2), &wsaData);
-
-
-	struct addrinfo *addr;
-	struct addrinfo hints;
-	const char bufer[] = "hola valen";
-	ZeroMemory(&hints, sizeof(hints));
-
-	hints.ai_family = AF_INET;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_protocol = IPPROTO_TCP;
-
-	getaddrinfo("192.168.1.34", "459", &hints, &addr);
-
-	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	connect(sock, addr->ai_addr, addr->ai_addrlen);
-
-	send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
-
-
-	shutdown(sock, 1);
-	closesocket(sock);
-
-	WSACleanup();
-
+	int a = 0;
+	Menu(&a);
+	if (a == 1) {
+		fantasma ghostA = inicialitzarFantasma(41, 14, 2);
+		fantasma ghostB = inicialitzarFantasma(43, 14, 3);
+		fantasma ghostC = inicialitzarFantasma(40, 14, 4);
+		fantasma ghostD = inicialitzarFantasma(39, 14, 5);
+		pintar_mapa();
+		fantasma* f1 = &ghostA;
+		fantasma* f2 = &ghostB;
+		fantasma* f3 = &ghostC;
+		fantasma* f4 = &ghostD;
+		while (vides > 0 && punts < 1950) {
+			GameLoop(f1, f2, f3, f4);
+		}
+		for (int i = 0; i <= vides; i++) {
+			gotoxy(5, i + 27);
+			printf(" ");
+		}
+		if (vides == 0) {
+			cliente();
+			Menu(&a);
+		}
+	}
+	else if (a == 2) {
+		 cout << "hola" << endl;
+	}
+	else if (a == 3) {
+	 cout << "hola" << endl;
+	}
+	else if (a == 4) {
+		 cout << "hola" << endl;
+	}
+	else if (a == 5) {
+		 exit(0);
+	}
 	system("pause");
 }
+/*
 
-/*	fantasma ghostA = inicialitzarFantasma(41, 14, 2);
-	fantasma ghostB = inicialitzarFantasma(43, 14, 3);
-	fantasma ghostC = inicialitzarFantasma(40, 14, 4);
-	fantasma ghostD = inicialitzarFantasma(39, 14, 5);
-	pintar_mapa();
-	fantasma* f1 = &ghostA;
-	fantasma* f2 = &ghostB;
-	fantasma* f3 = &ghostC;
-	fantasma* f4 = &ghostD;
+system("pause");*/
 
-
-	while (vides > 0 && punts < 1950) {
-		srand(time(NULL));
-		thread M = thread(marcador);
-		thread Pacman = thread(mourePacman);
-		thread F1 = thread(moureFantasma, f1, rand() % 4);
-		thread F2 = thread(moureFantasma, f2, rand() % 4);
-		thread F3 = thread(moureFantasma, f3, rand() % 4);
-		thread F4 = thread(moureFantasma, f4, rand() % 4);
-
-		M.join();
-		xocPacman(f1);
-		xocPacman(f2);
-		xocPacman(f3);
-		xocPacman(f4);
-		Pacman.join();
-
-		F1.join();
-		F2.join();
-		F3.join();
-		F4.join();
-
-		Sleep(110);
-	}
-	for (int i = 0; i <= vides; i++) {
-		gotoxy(5, i + 27);
-		printf(" ");
-	}*/
 
