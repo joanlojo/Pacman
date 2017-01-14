@@ -336,13 +336,13 @@ void cliente() {
 	string name;
 	cin >> name;
 	char bufer[10];
-	itoa(punts, bufer, 10);
+	_itoa_s(punts, bufer, 10);
 	string total = name + "/" + bufer;
 	//pla->score = punts;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-	const char* ch = (const char*)&total;
+	const char* ch = (const char*)&name;
 	struct addrinfo *addr;
 	struct addrinfo hints;
 	//const char bufer[] = "hola soy joan";
@@ -406,7 +406,7 @@ void GameLoop(fantasma *f1, fantasma *f2, fantasma *f3, fantasma *f4) {
 }
 void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	int a = 0;
-	player p;
+
 	for (;;) {
 		Menu(&a);
 		if (a == 1) {
