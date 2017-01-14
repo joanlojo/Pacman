@@ -425,7 +425,7 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 				printf(" ");
 			}
 			if (vides == 0) {
-				cliente(&p);
+				cliente();
 				vides = 1;
 				Menu(&a);
 			}
