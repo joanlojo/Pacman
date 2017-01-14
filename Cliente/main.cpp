@@ -326,13 +326,16 @@ void marcador() {
 	m.unlock();
 }
 void cliente() {
+	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
+	char name[10];
+	cin >> name;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-
+	const char* ch = (const char*)&name;
 	struct addrinfo *addr;
 	struct addrinfo hints;
-	const char bufer[] = "Hola";
+	//const char bufer[] = name;
 	ZeroMemory(&hints, sizeof(hints));
 
 	hints.ai_family = AF_INET;
@@ -344,7 +347,7 @@ void cliente() {
 	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
 
-	send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
+	send(sock, *&ch, sizeof(ch) / sizeof(char), 0);
 
 
 	shutdown(sock, 2);
@@ -353,9 +356,7 @@ void cliente() {
 	WSACleanup();
 }
 void registro() {
-	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
-	char name[10];
-	cin >> name;
+	
 }
 void Menu(int *a) {
 	//int a;
@@ -397,7 +398,6 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	int a = 0;
 	for (;;) {
 		Menu(&a);
-
 		if (a == 1) {
 			fantasma ghostA = inicialitzarFantasma(41, 14, 2);
 			fantasma ghostB = inicialitzarFantasma(43, 14, 3);
