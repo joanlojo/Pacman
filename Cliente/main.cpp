@@ -398,11 +398,11 @@ void cliente(timer t, int *a) {
 	cin >> name;
 	char bufer[10];
 	char bufer1[10];
-	char bufer2[1];
-	char bufer3[1];
-	char bufer4[1];
-	char bufer5[1];
-	char bufer6[1];
+	char bufer2[10];
+	char bufer3[10];
+	char bufer4[10];
+	char bufer5[10];
+	char bufer6[10];
 	_itoa_s(punts, bufer, 10);
 	_itoa_s(*a, bufer6, 10);
 	_itoa_s(fail, bufer1, 10);
@@ -549,8 +549,6 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	}
 	system("pause");
 }
-/*
 
-system("pause");*/
 
 
