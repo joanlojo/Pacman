@@ -337,7 +337,7 @@ void cliente() {
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-	const char ch = (const char)name + '/' + (char)punts;
+	const char ch = (const char)name;
 	struct addrinfo *addr;
 	struct addrinfo hints;
 	//const char bufer[] = "hola soy joan";
