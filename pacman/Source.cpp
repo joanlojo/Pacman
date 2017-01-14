@@ -97,7 +97,7 @@ void ReadRankingFile(Player ranking[], int playerScore, std::string playerName) 
 	WriteRankingFile(ranking);
 }
 
-void WriteUserFile(Player userRanking[], std::string userName) {
+void WriteUserFile(Player userRanking[], std::string userName, int achiv[]) {
 	ofstream fSalida;
 	std::string X = "users/", Y = userName, Z = ".txt", userRoute = X + Y + Z;
 	fSalida.open(userRoute, ios::out);
@@ -110,14 +110,51 @@ void WriteUserFile(Player userRanking[], std::string userName) {
 		}
 	}
 	fSalida.close();
-}
-void ReadUserFile(std::string userName, int userScore, Player userRanking[]) {
-	ifstream fEntrada;
 
-	std::string X = "users/", Y = userName, Z = ".txt", userRoute = X + Y + Z;
+	std::string achiv2[5];
+
+	for (int i = 0; i < 5; i++) {
+		achiv2[i] = to_string(achiv[i]);
+	}
+
+	ofstream fSalida2;
+	std::string X2 = "achiv/", userRoute2 = X2 + Y + Z;
+	fSalida2.open(userRoute2, ios::out);
+	if (fSalida2.fail()) {
+		cout << "<WARNING> File can not be opened" << endl;
+	}
+	else {
+		for (int i = 0; i < 5; i++) {
+			fSalida2 << achiv2[i] << endl;
+		}
+	}
+	fSalida2.close();
+}
+void ReadUserFile(std::string userName, int userScore, Player userRanking[], int achiv2[]) {
+	ifstream fEntrada;
+	ifstream fEntrada2;
+	int achiv[5];
+
+	std::string X2 = "achiv/", Y = userName, Z = ".txt", userRoute2 = X2 + Y + Z;
+	fEntrada2.open(userRoute2, ios::in);
+	if (fEntrada2.fail()) {
+		cout << "<WARNING> File achiv can not be opened" << endl;
+		cout << "          User doesn't exist" << endl;
+		cout << "          Creating a new file" << endl;
+	}
+	else {
+		std::string lectura;
+		for (int i = 0; i < 5; i++) {
+			getline(fEntrada2, lectura);
+			achiv[i] = stoi(lectura, nullptr, 10);
+		}
+		fEntrada2.close();
+	}
+
+	std::string X = "users/", userRoute = X + Y + Z;
 	fEntrada.open(userRoute, ios::in);
 	if (fEntrada.fail()) {
-		cout << "<WARNING> File can not be opened" << endl;
+		cout << "<WARNING> File ranking can not be opened" << endl;
 		cout << "          User doesn't exist" << endl;
 		cout << "          Creating a new file" << endl;
 		Player newUser;
@@ -134,7 +171,7 @@ void ReadUserFile(std::string userName, int userScore, Player userRanking[]) {
 				userRanking[i] = defaultUser;
 			}
 		}
-		WriteUserFile(userRanking, userName);
+		WriteUserFile(userRanking, userName, achiv);
 		cout << "<RANKING> <USER> <" << userName << ">" << endl;
 		PrintRanking(userRanking);
 	}
@@ -170,16 +207,31 @@ void ReadUserFile(std::string userName, int userScore, Player userRanking[]) {
 				break;
 			}
 		}
+
+		for (int i = 0; i < 5; i++) {
+			if (achiv[i] == 1 || achiv2[i] == 1) {
+				achiv2[i] = 1;
+			}
+		}
+
 		cout << "<RANKING> <USER> <" << userName << ">" << endl;
 		PrintRanking(userRanking);
-		WriteUserFile(userRanking, userName);
+		cout << "<ACHIEVEMENTS> <USER> <" << userName << ">" << endl;
+		cout << "<A> 1 - No score and dead --- " << achiv2[0] << endl;
+		cout << "<A> 2 - Score +50 --- " << achiv2[1] << endl;
+		cout << "<A> 3 - Score +100 --- " << achiv2[2] << endl;
+		cout << "<A> 4 - Lifetime +30s --- " << achiv2[3] << endl;
+		cout << "<A> 5 - Lifetime +60s --- " << achiv2[4] << endl;
+		WriteUserFile(userRanking, userName, achiv2);
 	}
 }
 
-void CutTheRope(char bufer[], std::string &name, int &score) {
+void CutTheRope(char bufer[], std::string &name, int &score, int achiv[], int &menu) {
+	std::string type;
+	std::string A[5];
 	std::string tempScore;
 	int i = 0;
-	for (i = 0; i < sizeof(bufer) - 1; i++) {
+	for (i = 0; i < 20 - 1; i++) {
 		if (bufer[i] != '/') {
 			name = name + bufer[i];
 		}
@@ -187,14 +239,68 @@ void CutTheRope(char bufer[], std::string &name, int &score) {
 			break;
 		}
 	}
-
-	for (i = i + 1; i < sizeof(bufer) - 1; i++) {
-		if (bufer[i] != '\0') {
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
+			type = bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
 			tempScore = tempScore + bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
+			A[0] = bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
+			A[1] = bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
+			A[2] = bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
+			A[3] = bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '\0') {
+			A[4] = bufer[i];
+		}
+		else if (bufer[i] == '\0') {
+			break;
 		}
 	}
 
+	menu = std::stoi(type, nullptr, 10);
 	score = std::stoi(tempScore, nullptr, 10);
+	for (int x = 0; x < 5; x++) {
+		achiv[x] = std::stoi(A[x], nullptr, 10);
+	}
 
 }
 
@@ -202,6 +308,8 @@ void server() {
 	cout << "<SERVER> Waiting" << endl;
 	Player ranking[10];
 	Player userRanking[10];
+	int achiv[5];
+	int menu;
 
 	std::string name;
 	int score;
@@ -238,20 +346,38 @@ void server() {
 	if (recv) {
 		cout << "<SERVER> Recv correct" << endl;
 		cout << "<CLIENT SEND> Buffer: " << bufer << endl;
-		CutTheRope(bufer, name, score);
+		CutTheRope(bufer, name, score, achiv, menu);
 		cout << "<SERVER> Name: " << name << endl;
 		cout << "<SERVER> Score: " << score << endl;
+		cout << "<SERVER> Menu: " << menu << endl;
+		for (int i = 0; i < 5; i++) {
+			cout << "<SERVER> Achievement: " << achiv[i] << endl;
+		}
 	}
 	else {
-		cout << "INFO: Recv wrong" << endl;
+		cout << "<SERVER> Recv wrong" << endl;
 	}
 
 	shutdown(socKrec, SD_RECEIVE);
 	closesocket(socKrec);
 	WSACleanup();
 
-	ReadRankingFile(ranking, score, name);
-	ReadUserFile(name, score, userRanking);
+	switch (menu) {
+	case 1:
+		ReadRankingFile(ranking, score, name);
+		ReadUserFile(name, score, userRanking, achiv);
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	default:
+		break;
+	}
+
+
 }
 
 int main(int argc, char **argv) { //port 5219
