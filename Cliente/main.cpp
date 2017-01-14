@@ -26,7 +26,7 @@ int dir = 0;
 int x = 39, y = 22;
 int anteriorpx, anteriorpy;
 
-long int punts = -5;
+int punts = -5;
 int contadorP = 0;
 int vides = 1;
 
@@ -328,14 +328,16 @@ void marcador() {
 	gotoxy(70, 27); printf("%c", 169);
 	m.unlock();
 }
-void cliente(player *pla) {
+void cliente() {
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
-	cin >> pla->name;
-	pla->score = punts;
+	char name[10];
+	cin >> name;
+	//char s = (char)punts;
+	//pla->score = punts;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-	const char* ch = (const char*)&pla;
+	const char* ch = (const char*)&name + '/' + (char)punts;
 	struct addrinfo *addr;
 	struct addrinfo hints;
 	//const char bufer[] = "hola soy joan";
