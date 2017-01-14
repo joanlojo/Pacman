@@ -357,7 +357,7 @@ void cliente() {
 	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
 
-	send(sock, *&ch, sizeof(ch) / sizeof(char), 0);
+	send(sock, name.data(),name.length(), 0);
 	//send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
 
 	shutdown(sock, 1);
