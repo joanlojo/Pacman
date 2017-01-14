@@ -54,7 +54,10 @@ struct fantasma {
 	int _x, _y; // posicíó del fantasma
 	int col; //color del fantasma
 };
-
+struct player {
+	int score;
+	char name[10];
+};
 void gotoxy(int x, int y)  // funcio que posiciona el cursor a la coordenada (x,y)
 {
 	HANDLE hCon;
@@ -325,17 +328,17 @@ void marcador() {
 	gotoxy(70, 27); printf("%c", 169);
 	m.unlock();
 }
-void cliente() {
+void cliente(player *pla) {
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
-	char name[10];
-	cin >> name;
+	cin >> pla->name;
+	pla->score = punts;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-	const char* ch = (const char*)&name;
+	const char* ch = (const char*)&pla;
 	struct addrinfo *addr;
 	struct addrinfo hints;
-	const char bufer[] = "hola soy joan";
+	//const char bufer[] = "hola soy joan";
 	ZeroMemory(&hints, sizeof(hints));
 
 	hints.ai_family = AF_INET;
@@ -348,7 +351,7 @@ void cliente() {
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
 
 	send(sock, *&ch, sizeof(ch) / sizeof(char), 0);
-	send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
+	//send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
 
 	shutdown(sock, 2);
 	closesocket(sock);
@@ -396,6 +399,7 @@ void GameLoop(fantasma *f1, fantasma *f2, fantasma *f3, fantasma *f4) {
 }
 void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	int a = 0;
+	player p;
 	for (;;) {
 		Menu(&a);
 		if (a == 1) {
@@ -416,7 +420,7 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 				printf(" ");
 			}
 			if (vides == 0) {
-				cliente();
+				cliente(&p);
 				vides = 1;
 				Menu(&a);
 			}
