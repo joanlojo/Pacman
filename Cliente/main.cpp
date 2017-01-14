@@ -408,7 +408,7 @@ void cliente(timer t) {
 	_itoa_s(cien, bufer3, 10);
 	_itoa_s(medio, bufer4, 10);
 	_itoa_s(entero, bufer5, 10);
-	string total = name + "/" + bufer + "/" + bufer1 + "/" + bufer2+ "/" + bufer3 + "/" + bufer4 + "/" + bufer5;
+	string total = bufer + '/' + name + "/" + bufer1 + "/" + bufer2+ "/" + bufer3 + "/" + bufer4 + "/" + bufer5;
 	//pla->score = punts;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -436,14 +436,13 @@ void cliente(timer t) {
 
 	WSACleanup();
 }
-void clienteMenu(int *a) {
+void clienteMenu(int *a) {		
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
 	string name;
 	cin >> name;
 	char bufer[10];
 	_itoa_s(*a, bufer, 10);
-	string total = name + "/" + bufer;
-
+	string total = bufer  + '/' +  name;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 	struct addrinfo *addr;
@@ -464,7 +463,6 @@ void clienteMenu(int *a) {
 
 	shutdown(sock, 1);
 	closesocket(sock);
-
 	WSACleanup();
 }
 void Menu(int *a) {
