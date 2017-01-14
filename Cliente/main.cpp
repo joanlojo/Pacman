@@ -335,20 +335,20 @@ void cliente() {
 	const char* ch = (const char*)&name;
 	struct addrinfo *addr;
 	struct addrinfo hints;
-	//const char bufer[] = name;
+	const char bufer[] = "hola valen";
 	ZeroMemory(&hints, sizeof(hints));
 
 	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
-	getaddrinfo("192.168.1.34", "459", &hints, &addr);
+	getaddrinfo("192.168.1.39", "4539", &hints, &addr);
 
 	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
 
 	send(sock, *&ch, sizeof(ch) / sizeof(char), 0);
-
+	send(sock, (char*)punts, sizeof(punts) / sizeof(int), 0);
 
 	shutdown(sock, 2);
 	closesocket(sock);
