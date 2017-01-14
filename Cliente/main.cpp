@@ -391,24 +391,26 @@ void achiv(timer t) {
 	if (temp == 60) entero = 1;
 	else if (punts == 0 && vides == 0) fail = 1;
 }
-void cliente(timer t) {
+void cliente(timer t, int *a) {
 	achiv(t);
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
 	string name;
 	cin >> name;
 	char bufer[10];
 	char bufer1[10];
-	char bufer2[10];
-	char bufer3[10];
-	char bufer4[10];
-	char bufer5[10];
+	char bufer2[1];
+	char bufer3[1];
+	char bufer4[1];
+	char bufer5[1];
+	char bufer6[1];
 	_itoa_s(punts, bufer, 10);
+	_itoa_s(*a, bufer6, 10);
 	_itoa_s(fail, bufer1, 10);
 	_itoa_s(cincuenta, bufer2, 10);
 	_itoa_s(cien, bufer3, 10);
 	_itoa_s(medio, bufer4, 10);
 	_itoa_s(entero, bufer5, 10);
-	string total = bufer + '/' + name + "/" + bufer1 + "/" + bufer2+ "/" + bufer3 + "/" + bufer4 + "/" + bufer5;
+	string total = name  + "/"+ bufer6 +"/" + bufer + "/" + bufer1 + "/" + bufer2+ "/" + bufer3 + "/" + bufer4 + "/" + bufer5;
 	//pla->score = punts;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -442,7 +444,7 @@ void clienteMenu(int *a) {
 	cin >> name;
 	char bufer[10];
 	_itoa_s(*a, bufer, 10);
-	string total = bufer  + '/' +  name;
+	string total = name  + "/" +  bufer;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 	struct addrinfo *addr;
@@ -524,7 +526,7 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 				printf(" ");
 			}
 			if (vides == 0) {
-				cliente(t);
+				cliente(t, &a);
 				vides = 1;
 				Menu(&a);
 			}
