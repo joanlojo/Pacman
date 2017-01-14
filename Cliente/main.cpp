@@ -11,6 +11,8 @@
 #include <time.h>
 #include <thread>
 #include <mutex>
+#include <ctime>
+#include <cstdio>
 #pragma comment(lib,"Ws2_32.lib")
 using namespace std;
 
@@ -56,7 +58,21 @@ int color[7] = { // tipos de colores
 	0x005, //violeta
 	0x00F //blanco brillante
 };
-
+class timer {
+public:
+	timer();
+	void           start();
+	void           stop();
+	void           reset();
+	bool           isRunning();
+	unsigned long  getTime();
+	bool           isOver(unsigned long seconds);
+private:
+	bool           resetted;
+	bool           running;
+	unsigned long  beg;
+	unsigned long  end;
+};
 struct fantasma {
 	int fdir; //direcció del fantasma que pot prendre valors del 0-3 i pot ser inicialitzat rand() % 4 , arriba abajo izquierda derecha
 	int _x, _y; // posicíó del fantasma
@@ -336,14 +352,47 @@ void marcador() {
 	gotoxy(70, 27); printf("%c", 169);
 	m.unlock();
 }
-void achiv() {
-	//if (punts == 0 && vides == 0) fail = 1;
+timer::timer() {
+	resetted = true;
+	running = false;
+	beg = 0;
+	end = 0;
+}
+
+void timer::start() {
+	if (!running) {
+		if (resetted)
+			beg = (unsigned long)clock();
+		else
+			beg -= end - (unsigned long)clock();
+		running = true;
+		resetted = false;
+	}
+}
+
+bool timer::isRunning() {
+	return running;
+}
+
+
+unsigned long timer::getTime() {
+	if (running)
+		return ((unsigned long)clock() - beg) / CLOCKS_PER_SEC;
+	else
+		return end - beg;
+}
+
+void achiv(timer t) {
+	int temp;
+	temp = t.getTime();
 	if (punts == 50) cincuenta = 1;
 	if (punts == 100) cien = 1;
+	if (temp == 30) medio = 1;
+	if (temp == 60) entero = 1;
 	else if (punts == 0 && vides == 0) fail = 1;
 }
-void cliente() {
-	achiv();
+void cliente(timer t) {
+	achiv(t);
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
 	string name;
 	cin >> name;
@@ -351,11 +400,15 @@ void cliente() {
 	char bufer1[10];
 	char bufer2[10];
 	char bufer3[10];
+	char bufer4[10];
+	char bufer5[10];
 	_itoa_s(punts, bufer, 10);
 	_itoa_s(fail, bufer1, 10);
 	_itoa_s(cincuenta, bufer2, 10);
 	_itoa_s(cien, bufer3, 10);
-	string total = name + "/" + bufer + "/" + bufer1 + "/" + bufer2+ "/" + bufer3;
+	_itoa_s(medio, bufer4, 10);
+	_itoa_s(entero, bufer5, 10);
+	string total = name + "/" + bufer + "/" + bufer1 + "/" + bufer2+ "/" + bufer3 + "/" + bufer4 + "/" + bufer5;
 	//pla->score = punts;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -419,6 +472,8 @@ void GameLoop(fantasma *f1, fantasma *f2, fantasma *f3, fantasma *f4) {
 }
 void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	int a = 0;
+	timer t;
+	t.start();
 	for (;;) {
 		Menu(&a);	
 		if (a == 1) {
@@ -432,7 +487,7 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 			fantasma* f3 = &ghostC;
 			fantasma* f4 = &ghostD;
 			while (vides > 0 && punts < 1950) {
-				achiv();
+				achiv(t);
 				GameLoop(f1, f2, f3, f4);
 			}
 			for (int i = 0; i <= vides; i++) {
@@ -440,7 +495,7 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 				printf(" ");
 			}
 			if (vides == 0) {
-				cliente();
+				cliente(t);
 				vides = 1;
 				Menu(&a);
 			}
