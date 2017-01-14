@@ -335,12 +335,14 @@ void cliente() {
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
 	string name;
 	cin >> name;
-	
+	char bufer[10];
+	itoa(punts, bufer, 10);
+	string total = name + "/" + bufer;
 	//pla->score = punts;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-	const char* ch = (const char*)&name;
+	const char* ch = (const char*)&total;
 	struct addrinfo *addr;
 	struct addrinfo hints;
 	//const char bufer[] = "hola soy joan";
