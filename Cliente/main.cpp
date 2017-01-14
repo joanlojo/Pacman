@@ -436,6 +436,37 @@ void cliente(timer t) {
 
 	WSACleanup();
 }
+void clienteMenu(int *a) {
+	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
+	string name;
+	cin >> name;
+	char bufer[10];
+	_itoa_s(*a, bufer, 10);
+	string total = name + "/" + bufer;
+
+	WSAData wsaData;
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
+	struct addrinfo *addr;
+	struct addrinfo hints;
+
+	ZeroMemory(&hints, sizeof(hints));
+
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_protocol = IPPROTO_TCP;
+
+	getaddrinfo("192.168.1.39", "4539", &hints, &addr);
+
+	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	connect(sock, addr->ai_addr, addr->ai_addrlen);
+
+	send(sock, total.data(), total.length() + 1, 0);
+
+	shutdown(sock, 1);
+	closesocket(sock);
+
+	WSACleanup();
+}
 void Menu(int *a) {
 	cout << "Menu Principal" << endl;
 	cout << endl << endl;
@@ -501,15 +532,15 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 			}
 		}
 		else if (a == 2) {
-			cout << "hola" << endl;
+			clienteMenu(&a);
 			Menu(&a);
 		}
 		else if (a == 3) {
-			cout << "hola" << endl;
+			clienteMenu(&a);
 			Menu(&a);
 		}
 		else if (a == 4) {
-			cout << "hola" << endl;
+			clienteMenu(&a);
 			Menu(&a);
 		}
 		else if (a == 5) {
