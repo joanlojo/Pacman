@@ -335,7 +335,7 @@ void cliente() {
 	const char* ch = (const char*)&name;
 	struct addrinfo *addr;
 	struct addrinfo hints;
-	const char bufer[] = "hola valen";
+	const char bufer[] = "hola soy joan";
 	ZeroMemory(&hints, sizeof(hints));
 
 	hints.ai_family = AF_INET;
@@ -348,7 +348,7 @@ void cliente() {
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
 
 	send(sock, *&ch, sizeof(ch) / sizeof(char), 0);
-	send(sock, (char*)punts, sizeof(punts) / sizeof(int), 0);
+	send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
 
 	shutdown(sock, 2);
 	closesocket(sock);
