@@ -345,7 +345,7 @@ void achiv() {
 	else cien = 0;
 }
 void cliente() {
-	achiv();
+	//achiv();
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
 	string name;
 	cin >> name;
@@ -426,6 +426,7 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 
 	for (;;) {
 		Menu(&a);
+		achiv();
 		if (a == 1) {
 			fantasma ghostA = inicialitzarFantasma(41, 14, 2);
 			fantasma ghostB = inicialitzarFantasma(43, 14, 3);
