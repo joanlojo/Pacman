@@ -28,7 +28,7 @@ int anteriorpx, anteriorpy;
 
 long int punts = -5;
 int contadorP = 0;
-int vides = 3;
+int vides = 1;
 
 void setCColor(int color) // colores del juego
 {
@@ -417,7 +417,7 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 			}
 			if (vides == 0) {
 				cliente();
-				vides = 3;
+				vides = 1;
 				Menu(&a);
 			}
 		}
