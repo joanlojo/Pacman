@@ -337,9 +337,9 @@ void cliente() {
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-	const char* ch = (const char*)&name;
+	//const char* ch = (const char*)&name;
 	const char* cy = (const char*)&punts;
-	const char* ct = ch + '/';
+	//char *ct = ch + '/';
 	struct addrinfo *addr;
 	struct addrinfo hints;
 	//const char bufer[] = "hola soy joan";
@@ -354,7 +354,7 @@ void cliente() {
 	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
 
-	send(sock, *&ct, sizeof(ct) / sizeof(char), 0);
+	send(sock, *&cy, sizeof(cy) / sizeof(char), 0);
 	//send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
 
 	shutdown(sock, 2);
