@@ -4,6 +4,8 @@
 #include <WS2tcpip.h>
 #include <Windows.h>
 #include <stdio.h>
+#include <sstream>
+#include <string>
 //#include <windows.h>
 #include <conio.h>
 #include <time.h>
@@ -26,7 +28,7 @@ int dir = 0;
 int x = 39, y = 22;
 int anteriorpx, anteriorpy;
 
-int punts = -5;
+long int punts = -5;
 int contadorP = 0;
 int vides = 1;
 
@@ -329,17 +331,16 @@ void marcador() {
 	m.unlock();
 }
 void cliente() {
+	stringstream ss;
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
-	char name[10];
+	string name;
 	cin >> name;
-	//char s = (char)punts;
+	
 	//pla->score = punts;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-	//const char* ch = (const char*)&name;
-	const char* cy = (const char*)&punts;
-	//char *ct = ch + '/';
+	const char* ch = (const char*)&name;
 	struct addrinfo *addr;
 	struct addrinfo hints;
 	//const char bufer[] = "hola soy joan";
@@ -354,10 +355,10 @@ void cliente() {
 	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
 
-	send(sock, *&cy, sizeof(cy) / sizeof(char), 0);
+	send(sock, *&ch, sizeof(ch) / sizeof(char), 0);
 	//send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
 
-	shutdown(sock, 2);
+	shutdown(sock, 1);
 	closesocket(sock);
 
 	WSACleanup();
@@ -424,7 +425,7 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 				printf(" ");
 			}
 			if (vides == 0) {
-				cliente();
+				cliente(&p);
 				vides = 1;
 				Menu(&a);
 			}
