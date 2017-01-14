@@ -337,9 +337,10 @@ void marcador() {
 	m.unlock();
 }
 void achiv() {
-	if (punts == 0 && vides == 0) fail = 1;
-	else if (punts == 50) cincuenta = 1;
-	else if (punts == 100) cien = 1;
+	//if (punts == 0 && vides == 0) fail = 1;
+	if (punts == 50) cincuenta = 1;
+	if (punts == 100) cien = 1;
+	else if (punts == 0 && vides == 0) fail = 1;
 }
 void cliente() {
 	achiv();
@@ -419,8 +420,7 @@ void GameLoop(fantasma *f1, fantasma *f2, fantasma *f3, fantasma *f4) {
 void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	int a = 0;
 	for (;;) {
-		Menu(&a);
-		achiv();
+		Menu(&a);	
 		if (a == 1) {
 			fantasma ghostA = inicialitzarFantasma(41, 14, 2);
 			fantasma ghostB = inicialitzarFantasma(43, 14, 3);
@@ -432,6 +432,7 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 			fantasma* f3 = &ghostC;
 			fantasma* f4 = &ghostD;
 			while (vides > 0 && punts < 1950) {
+				achiv();
 				GameLoop(f1, f2, f3, f4);
 			}
 			for (int i = 0; i <= vides; i++) {
