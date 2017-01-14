@@ -350,11 +350,14 @@ void cliente() {
 	string name;
 	cin >> name;
 	char bufer[10];
+	char bufer1[10];
+	char bufer2[10];
+	char bufer3[10];
 	_itoa_s(punts, bufer, 10);
-	_itoa_s(fail, bufer, 10);
-	_itoa_s(cincuenta, bufer, 10);
-	_itoa_s(cien, bufer, 10);
-	string total = name + "/" + bufer;
+	_itoa_s(fail, bufer1, 10);
+	_itoa_s(cincuenta, bufer2, 10);
+	_itoa_s(cien, bufer3, 10);
+	string total = name + "/" + bufer + "/" + bufer1 + "/" + bufer2+ "/" + bufer3;
 	//pla->score = punts;
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
