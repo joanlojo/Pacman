@@ -338,14 +338,11 @@ void marcador() {
 }
 void achiv() {
 	if (punts == 0 && vides == 0) fail = 1;
-	else fail = 0;
-	if (punts == 50) cincuenta = 1;
-	else cincuenta = 0;
-	if (punts == 100) cien = 1;
-	else cien = 0;
+	else if (punts == 50) cincuenta = 1;
+	else if (punts == 100) cien = 1;
 }
 void cliente() {
-	//achiv();
+	achiv();
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
 	string name;
 	cin >> name;
@@ -386,7 +383,6 @@ void cliente() {
 	WSACleanup();
 }
 void Menu(int *a) {
-	//int a;
 	cout << "Menu Principal" << endl;
 	cout << endl << endl;
 	cout << "Selecciona que quieres hacer" << endl;
@@ -396,7 +392,6 @@ void Menu(int *a) {
 	cout << "4 -- Achivments" << endl;
 	cout << "5 -- Salir" << endl;
 	cin >> *a;
-	//return a;
 }
 void GameLoop(fantasma *f1, fantasma *f2, fantasma *f3, fantasma *f4) {
 	srand(time(NULL));
@@ -423,7 +418,6 @@ void GameLoop(fantasma *f1, fantasma *f2, fantasma *f3, fantasma *f4) {
 }
 void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 	int a = 0;
-
 	for (;;) {
 		Menu(&a);
 		achiv();
