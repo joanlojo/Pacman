@@ -32,6 +32,12 @@ long int punts = -5;
 int contadorP = 0;
 int vides = 1;
 
+int fail;
+int cincuenta;
+int cien;
+int medio;
+int entero;
+
 void setCColor(int color) // colores del juego
 {
 	static HANDLE hConsole;
@@ -330,13 +336,24 @@ void marcador() {
 	gotoxy(70, 27); printf("%c", 169);
 	m.unlock();
 }
+void achiv() {
+	if (punts == 0 && vides == 0) fail = 1;
+	else fail = 0;
+	if (punts == 50) cincuenta = 1;
+	else cincuenta = 0;
+	if (punts == 100) cien = 1;
+	else cien = 0;
+}
 void cliente() {
-	stringstream ss;
+	achiv();
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
 	string name;
 	cin >> name;
 	char bufer[10];
 	_itoa_s(punts, bufer, 10);
+	_itoa_s(fail, bufer, 10);
+	_itoa_s(cincuenta, bufer, 10);
+	_itoa_s(cien, bufer, 10);
 	string total = name + "/" + bufer;
 	//pla->score = punts;
 	WSAData wsaData;
@@ -364,9 +381,6 @@ void cliente() {
 	closesocket(sock);
 
 	WSACleanup();
-}
-void registro() {
-	
 }
 void Menu(int *a) {
 	//int a;
