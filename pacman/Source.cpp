@@ -130,7 +130,7 @@ void WriteUserFile(Player userRanking[], std::string userName, int achiv[]) {
 	}
 	fSalida2.close();
 }
-void ReadUserFile(std::string userName, int userScore, Player userRanking[], int achiv2[]) {
+void ReadUserFile(std::string userName, int userScore, Player userRanking[], int achiv2[], std::string &maxScore) {
 	ifstream fEntrada;
 	ifstream fEntrada2;
 	int achiv[5];
@@ -150,6 +150,7 @@ void ReadUserFile(std::string userName, int userScore, Player userRanking[], int
 		}
 		fEntrada2.close();
 	}
+
 
 	std::string X = "users/", userRoute = X + Y + Z;
 	fEntrada.open(userRoute, ios::in);
@@ -214,14 +215,26 @@ void ReadUserFile(std::string userName, int userScore, Player userRanking[], int
 			}
 		}
 
+		std::string achiv3[5];
+		for (int i = 0; i < 5; i++) {
+			achiv3[i] = to_string(achiv2[i]);
+		}
+
+		std::string rec = "0";
+		if (userRanking[0].score == userScore) {
+			rec = "1";
+		}
+		maxScore = to_string(userRanking[0].score);
+		maxScore = maxScore + '/' + rec;
+
 		cout << "<RANKING> <USER> <" << userName << ">" << endl;
 		PrintRanking(userRanking);
 		cout << "<ACHIEVEMENTS> <USER> <" << userName << ">" << endl;
 		cout << "<A> 1 - No score and dead --- " << achiv2[0] << endl;
-		cout << "<A> 2 - Score +50 --- " << achiv2[1] << endl;
-		cout << "<A> 3 - Score +100 --- " << achiv2[2] << endl;
-		cout << "<A> 4 - Lifetime +30s --- " << achiv2[3] << endl;
-		cout << "<A> 5 - Lifetime +60s --- " << achiv2[4] << endl;
+		cout << "<A> 2 - Score +50 ----------- " << achiv2[1] << endl;
+		cout << "<A> 3 - Score +100 ---------- " << achiv2[2] << endl;
+		cout << "<A> 4 - Lifetime +60s ------- " << achiv2[3] << endl;
+		cout << "<A> 5 - Lifetime +120s ------- " << achiv2[4] << endl;
 		WriteUserFile(userRanking, userName, achiv2);
 	}
 }
@@ -304,12 +317,117 @@ void CutTheRope(char bufer[], std::string &name, int &score, int achiv[], int &m
 
 }
 
+void ConsultarAchiv(std::string &sAchiv, std::string &userName) {
+	ifstream fEntrada;
+	ifstream fEntrada2;
+	int achiv[5];
+
+	std::string X2 = "achiv/", Y = userName, Z = ".txt", userRoute2 = X2 + Y + Z;
+	fEntrada2.open(userRoute2, ios::in);
+	if (fEntrada2.fail()) {
+		cout << "<WARNING> File achiv can not be opened" << endl;
+		cout << "          User doesn't exist" << endl;
+	}
+	else {
+		std::string lectura;
+		for (int i = 0; i < 5; i++) {
+			getline(fEntrada2, lectura);
+			achiv[i] = stoi(lectura, nullptr, 10);
+		}
+		fEntrada2.close();
+	}
+	sAchiv = sAchiv + to_string(achiv[0]) + '/' + to_string(achiv[1]) + '/' + to_string(achiv[2]) + '/' + to_string(achiv[3]) + '/' + to_string(achiv[4]);
+}
+
+void ConsultarRankingGeneral(std::string &rankingGeneral) {
+	Player ranking[10];
+	std::string lectura;
+	ifstream fEntrada;
+	fEntrada.open("ranking/ranking.txt", ios::in);
+	if (fEntrada.fail()) {
+		cout << "<WARNING> File can not be opened" << endl;
+	}
+	else {
+		bool state = false;
+		int i = 0;
+		for (int a = 0; a < 20; a++) {
+			getline(fEntrada, lectura);
+			if (state == false) {
+				ranking[i].name = lectura;
+				state = true;
+			}
+			else if (state == true) {
+				ranking[i].score = std::stoi(lectura, nullptr, 10);
+				state = false;
+				i++;
+			}
+		}
+	}
+	fEntrada.close();
+	rankingGeneral = ranking[0].name + '/' + to_string(ranking[0].score) + '/' +
+		ranking[1].name + '/' + to_string(ranking[1].score) + '/' +
+		ranking[2].name + '/' + to_string(ranking[2].score) + '/' +
+		ranking[3].name + '/' + to_string(ranking[3].score) + '/' +
+		ranking[4].name + '/' + to_string(ranking[4].score) + '/' +
+		ranking[5].name + '/' + to_string(ranking[5].score) + '/' +
+		ranking[6].name + '/' + to_string(ranking[6].score) + '/' +
+		ranking[7].name + '/' + to_string(ranking[7].score) + '/' +
+		ranking[8].name + '/' + to_string(ranking[8].score) + '/' +
+		ranking[9].name + '/' + to_string(ranking[9].score);
+	cout << rankingGeneral << endl;
+}
+
+void ConsultarRankingPersonal(std::string &rankingPersonal, std::string userName) {
+	Player ranking[10];
+	std::string lectura;
+	ifstream fEntrada;
+	std::string X = "users/", Y = userName, Z = ".txt", userRoute = X + Y + Z;
+	fEntrada.open(userRoute, ios::in);
+	if (fEntrada.fail()) {
+		cout << "<WARNING> File can not be opened" << endl;
+	}
+	else {
+		bool state = false;
+		int i = 0;
+		for (int a = 0; a < 20; a++) {
+			getline(fEntrada, lectura);
+			if (state == false) {
+				ranking[i].name = lectura;
+				state = true;
+			}
+			else if (state == true) {
+				ranking[i].score = std::stoi(lectura, nullptr, 10);
+				state = false;
+				i++;
+			}
+		}
+	}
+	fEntrada.close();
+	rankingPersonal = ranking[0].name + '/' + to_string(ranking[0].score) + '/' +
+		ranking[1].name + '/' + to_string(ranking[1].score) + '/' +
+		ranking[2].name + '/' + to_string(ranking[2].score) + '/' +
+		ranking[3].name + '/' + to_string(ranking[3].score) + '/' +
+		ranking[4].name + '/' + to_string(ranking[4].score) + '/' +
+		ranking[5].name + '/' + to_string(ranking[5].score) + '/' +
+		ranking[6].name + '/' + to_string(ranking[6].score) + '/' +
+		ranking[7].name + '/' + to_string(ranking[7].score) + '/' +
+		ranking[8].name + '/' + to_string(ranking[8].score) + '/' +
+		ranking[9].name + '/' + to_string(ranking[9].score);
+	cout << rankingPersonal << endl;
+}
+
+
+
 void server() {
 	cout << "<SERVER> Waiting" << endl;
 	Player ranking[10];
 	Player userRanking[10];
 	int achiv[5];
 	int menu;
+	std::string maxScore;
+	std::string sAchiv;
+	std::string rankingGeneral;
+	std::string rankingPersonal;
 
 	std::string name;
 	int score;
@@ -332,7 +450,7 @@ void server() {
 
 	SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	bind(sock, addrDest->ai_addr, addrDest->ai_addrlen);
-	listen(sock, 1); // 1 = numero de conexiones permitidas
+	listen(sock, 1);
 	SOCKET socKrec = accept(sock, NULL, NULL);
 	if (accept) {
 		cout << "<SERVER> Accept correct" << endl;
@@ -358,30 +476,41 @@ void server() {
 		cout << "<SERVER> Recv wrong" << endl;
 	}
 
-	shutdown(socKrec, SD_RECEIVE);
-	closesocket(socKrec);
-	WSACleanup();
+
+
 
 	switch (menu) {
 	case 1:
 		ReadRankingFile(ranking, score, name);
-		ReadUserFile(name, score, userRanking, achiv);
+		ReadUserFile(name, score, userRanking, achiv, maxScore);
+		std::cout << maxScore.data() << endl;
+		send(socKrec, maxScore.data(), maxScore.length() + 1, 0);
 		break;
 	case 2:
+		ConsultarRankingGeneral(rankingGeneral);
+		send(socKrec, rankingGeneral.data(), rankingGeneral.length() + 1, 0);
 		break;
 	case 3:
+		ConsultarRankingPersonal(rankingPersonal, name);
+		send(socKrec, rankingPersonal.data(), rankingPersonal.length() + 1, 0);
 		break;
 	case 4:
+		ConsultarAchiv(sAchiv, name);
+		cout << sAchiv << endl;
+		send(socKrec, sAchiv.data(), sAchiv.length() + 1, 0);
 		break;
 	default:
 		break;
 	}
 
+	shutdown(socKrec, SD_RECEIVE);
+	closesocket(socKrec);
 
 }
 
-int main(int argc, char **argv) { //port 5219
+int main(int argc, char **argv) {
 	for (;;) {
+		WSACleanup();
 		server();
 	}
 	return 0;
