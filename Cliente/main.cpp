@@ -514,10 +514,11 @@ void cliente(timer t, int *a) {
 
 	send(sock, total.data(),total.length()+1, 0);
 	//send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
-	char mes[512];
-	int i = recv(sock, mes, 512, 0);
-	mes[i - 1] = '\0';
+
 	if (*a == 1) {
+		char mes[512];
+		int i = recv(sock, mes, 512, 0);
+		mes[i - 1] = '\0';
 		CutTheRopePlay(mes, punts, record);
 		cout << punts << endl;
 		if (record == 1) {
@@ -528,6 +529,9 @@ void cliente(timer t, int *a) {
 		}
 	}
 	else if (*a == 4) {
+		char mes[512];
+		int i = recv(sock, mes, 512, 0);
+		mes[i - 1] = '\0';
 		CutTheRopeAchi(mes, fail, cincuenta, cien, medio, entero);
 		cout << fail << endl << cincuenta << endl << cien << endl << medio << entero << endl;
 	}
