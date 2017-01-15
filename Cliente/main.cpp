@@ -374,171 +374,179 @@ unsigned long timer::getTime() {
 		return end - beg;
 }
 void CutTheRopeRanking(char bufer[]) {
-	string s[20];
+	std::string a, b, c, d, e, f, g, h, i_, j, k, l, m, n, o, p, q, r, s, t;
 	int i = 0;
-		for (i = i +1; i < 20 - 1; i++) {
+		for (i = 0; i <100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				a = a + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				b = b + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				c = c + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				d = d + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				e = e + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				f = f + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				g = g + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				h = h + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				i_ = i_ + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				j = j + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				k = k + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				l = l + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				m = m + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				n = n + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				o = o + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				p = p + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				q = q + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				r = r + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
+		for (i = i + 1; i < 100 - 1; i++) {
 			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+				s = s + bufer[i];
 			}
 			else if (bufer[i] == '/') {
 				break;
 			}
 		}
-		for (i = i + 1; i < 20 - 1; i++) {
-			if (bufer[i] != '/') {
-				s[i] = s[i] + bufer[i];
+		for (i = i + 1; i < 100 - 1; i++) {
+			if (bufer[i] != '\0') {
+				t = t + bufer[i];
 			}
-			else if (bufer[i] == '/') {
+			else if (bufer[i] == '\0') {
 				break;
 			}
 		}
-		for (int i = 0; i < 20; i++) {
-			cout << s[i] << endl;
-		}
+		
+		cout << "1 -- " << a << " -- " << b << endl;
+		cout << "2 -- " << c << " -- " << d << endl;
+		cout << "3 -- " << e << " -- " << f << endl;
+		cout << "4 -- " << g << " -- " << h << endl;
+		cout << "5 -- " << i << " -- " << j << endl;
+		cout << "6 -- " << k << " -- " << l << endl;
+		cout << "7 -- " << m << " -- " << n << endl;
+		cout << "8 -- " << o << " -- " << p << endl;
+		cout << "9 -- " << q << " -- " << e << endl;
+		cout << "10 -- " << s << " -- " << t << endl;
 }
 void CutTheRopePlay(char bufer[], int &score, int &record) {
 	std::string type;
