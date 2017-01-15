@@ -527,7 +527,7 @@ void cliente(timer t, int *a) {
 			cout << "No record no Party" << endl;
 		}
 	}
-	else if (*a == 2) {
+	else if (*a == 4) {
 		CutTheRopeAchi(mes, fail, cincuenta, cien, medio, entero);
 		cout << fail << endl << cincuenta << endl << cien << endl << medio << entero << endl;
 	}
