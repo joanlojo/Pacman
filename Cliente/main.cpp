@@ -384,7 +384,7 @@ void CutTheRope(char bufer[], int &score, int &record) {
 	int i = 0;
 	for (i = 0; i < 20 - 1; i++) {
 		if (bufer[i] != '/') {
-			score = score + bufer[i];
+			tempScore = tempScore + bufer[i];
 		}
 		else if (bufer[i] == '/') {
 			break;
@@ -392,7 +392,7 @@ void CutTheRope(char bufer[], int &score, int &record) {
 	}	
 	for (i = i + 1; i < 20 - 1; i++) {
 		if (bufer[i] != '\0') {
-			record = bufer[i];
+			type = bufer[i];
 		}
 		else if (bufer[i] == '\0') {
 			break;
@@ -439,7 +439,7 @@ void cliente(timer t, int *a) {
 		cin >> name;
 		char bufer[10];
 		_itoa_s(*a, bufer, 10);
-		total = name + "/" + bufer + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0";
+		total = name + "/" + bufer + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0"	;
 	}
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
