@@ -638,7 +638,7 @@ void cliente(timer t, int *a) {
 	string total;
 	if (*a == 1) {
 		achiv(t);
-		cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
+		cout << "Escribe tu nombre para registrar tu ranking: " << endl;
 		string name;
 		cin >> name;
 		char bufer[10];
@@ -658,7 +658,7 @@ void cliente(timer t, int *a) {
 		total = name + "/" + bufer6 + "/" + bufer + "/" + bufer1 + "/" + bufer2 + "/" + bufer3 + "/" + bufer4 + "/" + bufer5;
 	}
 	else {
-		cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
+		cout << "Escribe tu nombre para mostrar las puntuaciones: " << endl;
 		string name;
 		cin >> name;
 		char bufer[10];
@@ -667,11 +667,8 @@ void cliente(timer t, int *a) {
 	}
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
-
-	//const char* ch = (const char*)&name;
 	struct addrinfo *addr;
 	struct addrinfo hints;
-	//const char bufer[] = "hola soy joan";
 	ZeroMemory(&hints, sizeof(hints));
 
 	hints.ai_family = AF_INET;
@@ -778,11 +775,11 @@ void cliente(timer t, int *a) {
 void Menu(int *a) {
 	cout << "Menu Principal" << endl;
 	cout << endl << endl;
-	cout << "Selecciona que quieres hacer" << endl;
+	cout << "Selecciona que quieres hacer: " << endl;
 	cout << "1 -- Jugar" << endl;
-	cout << "2 -- Consultar Ranking" << endl;
-	cout << "3 -- Consultar mejores puntiaciones" << endl;
-	cout << "4 -- Achivments" << endl;
+	cout << "2 -- Consultar ranking general" << endl;
+	cout << "3 -- Consultar mis mejores puntuaciones" << endl;
+	cout << "4 -- Consultar mis achievements" << endl;
 	cout << "5 -- Salir" << endl;
 	cin >> *a;
 }
