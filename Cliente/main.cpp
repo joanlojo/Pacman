@@ -358,7 +358,6 @@ timer::timer() {
 	beg = 0;
 	end = 0;
 }
-
 void timer::start() {
 	if (!running) {
 		if (resetted)
@@ -369,12 +368,9 @@ void timer::start() {
 		resetted = false;
 	}
 }
-
 bool timer::isRunning() {
 	return running;
 }
-
-
 unsigned long timer::getTime() {
 	if (running)
 		return ((unsigned long)clock() - beg) / CLOCKS_PER_SEC;
@@ -392,26 +388,37 @@ void achiv(timer t) {
 	else if (punts == 0 && vides == 0) fail = 1;
 }
 void cliente(timer t, int *a) {
-	achiv(t);
-	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
-	string name;
-	cin >> name;
-	char bufer[10];
-	char bufer1[10];
-	char bufer2[10];
-	char bufer3[10];
-	char bufer4[10];
-	char bufer5[10];
-	char bufer6[10];
-	_itoa_s(punts, bufer, 10);
-	_itoa_s(*a, bufer6, 10);
-	_itoa_s(fail, bufer1, 10);
-	_itoa_s(cincuenta, bufer2, 10);
-	_itoa_s(cien, bufer3, 10);
-	_itoa_s(medio, bufer4, 10);
-	_itoa_s(entero, bufer5, 10);
-	string total = name  + "/"+ bufer6 +"/" + bufer + "/" + bufer1 + "/" + bufer2+ "/" + bufer3 + "/" + bufer4 + "/" + bufer5;
-	//pla->score = punts;
+	string total;
+	if (*a == 1) {
+		achiv(t);
+		cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
+		string name;
+		cin >> name;
+		char bufer[10];
+		char bufer1[10];
+		char bufer2[10];
+		char bufer3[10];
+		char bufer4[10];
+		char bufer5[10];
+		char bufer6[10];
+		_itoa_s(punts, bufer, 10);
+		_itoa_s(*a, bufer6, 10);
+		_itoa_s(fail, bufer1, 10);
+		_itoa_s(cincuenta, bufer2, 10);
+		_itoa_s(cien, bufer3, 10);
+		_itoa_s(medio, bufer4, 10);
+		_itoa_s(entero, bufer5, 10);
+		total = name + "/" + bufer6 + "/" + bufer + "/" + bufer1 + "/" + bufer2 + "/" + bufer3 + "/" + bufer4 + "/" + bufer5;
+		//pla->score = punts;
+	}
+	else {
+		cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
+		string name;
+		cin >> name;
+		char bufer[10];
+		_itoa_s(*a, bufer, 10);
+		total = name + "/" + bufer;
+	}
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
@@ -432,13 +439,16 @@ void cliente(timer t, int *a) {
 
 	send(sock, total.data(),total.length()+1, 0);
 	//send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
-
+	char mes[512];
+	int i = recv(sock, mes, 512, 0);
+	mes[i - 1] = '\0';
+	cout << mes << endl;
 	shutdown(sock, 1);
 	closesocket(sock);
 
 	WSACleanup();
 }
-void clienteMenu(int *a) {		
+/*void clienteMenu(int *a) {		
 	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
 	string name;
 	cin >> name;
@@ -466,7 +476,7 @@ void clienteMenu(int *a) {
 	shutdown(sock, 1);
 	closesocket(sock);
 	WSACleanup();
-}
+}*/
 void Menu(int *a) {
 	cout << "Menu Principal" << endl;
 	cout << endl << endl;
@@ -532,15 +542,15 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 			}
 		}
 		else if (a == 2) {
-			clienteMenu(&a);
+			cliente(t, &a);
 			Menu(&a);
 		}
 		else if (a == 3) {
-			clienteMenu(&a);
+			cliente(t, &a);
 			Menu(&a);
 		}
 		else if (a == 4) {
-			clienteMenu(&a);
+			cliente(t, &a);
 			Menu(&a);
 		}
 		else if (a == 5) {
