@@ -33,7 +33,8 @@ int anteriorpx, anteriorpy;
 int punts = -5;
 int contadorP = 0;
 int vides = 1;
-
+string name[20];
+int score[20];
 int fail;
 int cincuenta;
 int cien;
@@ -63,11 +64,8 @@ class timer {
 public:
 	timer();
 	void           start();
-	void           stop();
-	void           reset();
 	bool           isRunning();
 	unsigned long  getTime();
-	bool           isOver(unsigned long seconds);
 private:
 	bool           resetted;
 	bool           running;
@@ -79,10 +77,7 @@ struct fantasma {
 	int _x, _y; // posicíó del fantasma
 	int col; //color del fantasma
 };
-struct player {
-	int score;
-	char name[10];
-};
+
 void gotoxy(int x, int y)  // funcio que posiciona el cursor a la coordenada (x,y)
 {
 	HANDLE hCon;
@@ -378,6 +373,173 @@ unsigned long timer::getTime() {
 	else
 		return end - beg;
 }
+void CutTheRopeRanking(char bufer[]) {
+	string s[20];
+	int i = 0;
+		for (i = i +1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (i = i + 1; i < 20 - 1; i++) {
+			if (bufer[i] != '/') {
+				s[i] = s[i] + bufer[i];
+			}
+			else if (bufer[i] == '/') {
+				break;
+			}
+		}
+		for (int i = 0; i < 20; i++) {
+			cout << s[i] << endl;
+		}
+}
 void CutTheRopePlay(char bufer[], int &score, int &record) {
 	std::string type;
 	std::string tempScore;
@@ -401,6 +563,7 @@ void CutTheRopePlay(char bufer[], int &score, int &record) {
 	record = std::stoi(type, nullptr, 10);
 	score = std::stoi(tempScore, nullptr, 10);	
 }
+
 void CutTheRopeAchi(char bufer[], int &fail,int &cincuenta,int &cien,int &medio, int &entero) {
 	std::string achi1;
 	std::string achi2;
@@ -441,10 +604,10 @@ void CutTheRopeAchi(char bufer[], int &fail,int &cincuenta,int &cien,int &medio,
 		}
 	}
 	for (i = i + 1; i < 20 - 1; i++) {
-		if (bufer[i] != '\0') {
+		if (bufer[i] != '/') {
 			achi5 = bufer[i];
 		}
-		else if (bufer[i] == '\0') {
+		else if (bufer[i] == '/') {
 			break;
 		}
 	}
@@ -513,7 +676,6 @@ void cliente(timer t, int *a) {
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
 
 	send(sock, total.data(),total.length()+1, 0);
-	//send(sock, bufer, sizeof(bufer) / sizeof(char), 0);
 
 	if (*a == 1) {
 		char mes[512];
@@ -527,6 +689,12 @@ void cliente(timer t, int *a) {
 		else {
 			cout << "No record no Party" << endl;
 		}
+	}
+	else if (*a == 2 || *a == 3) {
+		char mes[512];
+		int i = recv(sock, mes, 512, 0);
+		mes[i - 1] = '\0';
+		CutTheRopeRanking(mes);
 	}
 	else if (*a == 4) {
 		char mes[512];
