@@ -536,7 +536,7 @@ void CutTheRopeRanking(char bufer[]) {
 				break;
 			}
 		}
-		
+		cout << "\n<RANKING>" << endl;
 		cout << "1 -- " << a << " -- " << b << endl;
 		cout << "2 -- " << c << " -- " << d << endl;
 		cout << "3 -- " << e << " -- " << f << endl;
@@ -546,7 +546,7 @@ void CutTheRopeRanking(char bufer[]) {
 		cout << "7 -- " << m << " -- " << n << endl;
 		cout << "8 -- " << o << " -- " << p << endl;
 		cout << "9 -- " << q << " -- " << e << endl;
-		cout << "10 -- " << s << " -- " << t << endl;
+		cout << "10 -- " << s << " -- " << t << "\n" << endl;
 }
 void CutTheRopePlay(char bufer[], int &score, int &record) {
 	std::string type;
