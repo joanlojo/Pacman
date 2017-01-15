@@ -439,7 +439,7 @@ void cliente(timer t, int *a) {
 		cin >> name;
 		char bufer[10];
 		_itoa_s(*a, bufer, 10);
-		total = name + "/" + bufer;
+		total = name + "/" + bufer + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0" + "/" + "0";
 	}
 	WSAData wsaData;
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
