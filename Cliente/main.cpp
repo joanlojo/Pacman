@@ -378,7 +378,7 @@ unsigned long timer::getTime() {
 	else
 		return end - beg;
 }
-void CutTheRope(char bufer[], int &score, int &record) {
+void CutTheRopePlay(char bufer[], int &score, int &record) {
 	std::string type;
 	std::string tempScore;
 	int i = 0;
@@ -400,6 +400,59 @@ void CutTheRope(char bufer[], int &score, int &record) {
 	}
 	record = std::stoi(type, nullptr, 10);
 	score = std::stoi(tempScore, nullptr, 10);	
+}
+void CutTheRopeAchi(char bufer[], int fail,int cincuenta,int cien,int medio, int entero) {
+	std::string achi1;
+	std::string achi2;
+	std::string achi3;
+	std::string achi4;
+	std::string achi5;
+	int i = 0;
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
+			achi1 = bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
+			achi2 = bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
+			achi3 = bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
+			achi4 = bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '\0') {
+			achi5 = bufer[i];
+		}
+		else if (bufer[i] == '\0') {
+			break;
+		}
+	}
+	fail = std::stoi(achi1, nullptr, 10);
+	cincuenta = std::stoi(achi2, nullptr, 10);
+	cien = std::stoi(achi3, nullptr, 10);
+	medio = std::stoi(achi4, nullptr, 10);
+	entero = std::stoi(achi5, nullptr, 10);
 }
 void achiv(timer t) {
 	int temp;
@@ -464,13 +517,19 @@ void cliente(timer t, int *a) {
 	char mes[512];
 	int i = recv(sock, mes, 512, 0);
 	mes[i - 1] = '\0';
-	CutTheRope(mes, punts, record);
-	cout << punts << endl;
-	if (record == 1) {
-		cout << "Tienes un nuevo record champion" << endl;
+	if (*a == 1) {
+		CutTheRopePlay(mes, punts, record);
+		cout << punts << endl;
+		if (record == 1) {
+			cout << "Tienes un nuevo record champion" << endl;
+		}
+		else {
+			cout << "No record no Party" << endl;
+		}
 	}
-	else {
-		cout << "No record no Party" << endl;
+	else if (*a == 2) {
+		CutTheRopeAchi(mes, fail, cincuenta, cien, medio, entero);
+		cout << fail << endl << cincuenta << endl << cien << endl << medio << entero << endl;
 	}
 	shutdown(sock, 1);
 	closesocket(sock);
