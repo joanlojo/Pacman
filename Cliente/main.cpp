@@ -30,7 +30,7 @@ int dir = 0;
 int x = 39, y = 22;
 int anteriorpx, anteriorpy;
 
-long int punts = -5;
+int punts = -5;
 int contadorP = 0;
 int vides = 1;
 
@@ -39,6 +39,7 @@ int cincuenta;
 int cien;
 int medio;
 int entero;
+int record;
 
 void setCColor(int color) // colores del juego
 {
@@ -377,7 +378,29 @@ unsigned long timer::getTime() {
 	else
 		return end - beg;
 }
-
+void CutTheRope(char bufer[], int &score, int &record) {
+	std::string type;
+	std::string tempScore;
+	int i = 0;
+	for (i = 0; i < 20 - 1; i++) {
+		if (bufer[i] != '/') {
+			score = score + bufer[i];
+		}
+		else if (bufer[i] == '/') {
+			break;
+		}
+	}	
+	for (i = i + 1; i < 20 - 1; i++) {
+		if (bufer[i] != '\0') {
+			record = bufer[i];
+		}
+		else if (bufer[i] == '\0') {
+			break;
+		}
+	}
+	record = std::stoi(type, nullptr, 10);
+	score = std::stoi(tempScore, nullptr, 10);	
+}
 void achiv(timer t) {
 	int temp;
 	temp = t.getTime();
@@ -409,7 +432,6 @@ void cliente(timer t, int *a) {
 		_itoa_s(medio, bufer4, 10);
 		_itoa_s(entero, bufer5, 10);
 		total = name + "/" + bufer6 + "/" + bufer + "/" + bufer1 + "/" + bufer2 + "/" + bufer3 + "/" + bufer4 + "/" + bufer5;
-		//pla->score = punts;
 	}
 	else {
 		cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
@@ -442,7 +464,14 @@ void cliente(timer t, int *a) {
 	char mes[512];
 	int i = recv(sock, mes, 512, 0);
 	mes[i - 1] = '\0';
-	cout << mes << endl;
+	CutTheRope(mes, punts, record);
+	cout << punts << endl;
+	if (record == 1) {
+		cout << "Tienes un nuevo record champion" << endl;
+	}
+	else {
+		cout << "No record no Party" << endl;
+	}
 	shutdown(sock, 1);
 	closesocket(sock);
 
