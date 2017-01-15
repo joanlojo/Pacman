@@ -612,10 +612,10 @@ void CutTheRopeAchi(char bufer[], int &fail,int &cincuenta,int &cien,int &medio,
 		}
 	}
 	for (i = i + 1; i < 20 - 1; i++) {
-		if (bufer[i] != '/') {
+		if (bufer[i] != '\0') {
 			achi5 = bufer[i];
 		}
-		else if (bufer[i] == '/') {
+		else if (bufer[i] == '\0') {
 			break;
 		}
 	}
