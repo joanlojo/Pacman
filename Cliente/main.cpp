@@ -401,7 +401,7 @@ void CutTheRopePlay(char bufer[], int &score, int &record) {
 	record = std::stoi(type, nullptr, 10);
 	score = std::stoi(tempScore, nullptr, 10);	
 }
-void CutTheRopeAchi(char bufer[], int fail,int cincuenta,int cien,int medio, int entero) {
+void CutTheRopeAchi(char bufer[], int &fail,int &cincuenta,int &cien,int &medio, int &entero) {
 	std::string achi1;
 	std::string achi2;
 	std::string achi3;
