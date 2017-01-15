@@ -408,7 +408,7 @@ void CutTheRopeAchi(char bufer[], int fail,int cincuenta,int cien,int medio, int
 	std::string achi4;
 	std::string achi5;
 	int i = 0;
-	for (i = i + 1; i < 20 - 1; i++) {
+	for (i = i; i < 20 - 1; i++) {
 		if (bufer[i] != '/') {
 			achi1 = bufer[i];
 		}
