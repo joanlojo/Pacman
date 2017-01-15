@@ -630,8 +630,8 @@ void achiv(timer t) {
 	temp = t.getTime();
 	if (punts == 50) cincuenta = 1;
 	if (punts == 100) cien = 1;
-	if (temp == 30) medio = 1;
-	if (temp == 60) entero = 1;
+	if (temp == 60) medio = 1;
+	if (temp == 120) entero = 1;
 	else if (punts == 0 && vides == 0) fail = 1;
 }
 void cliente(timer t, int *a) {
@@ -709,7 +709,37 @@ void cliente(timer t, int *a) {
 		int i = recv(sock, mes, 512, 0);
 		mes[i - 1] = '\0';
 		CutTheRopeAchi(mes, fail, cincuenta, cien, medio, entero);
-		cout << fail << endl << cincuenta << endl << cien << endl << medio << entero << endl;
+		if (fail == 1) {
+			cout << "Has conseguido no morir con 0 puntos, eres mejor que un bebe" << endl;
+		}
+		else if (fail == 0) {
+			cout << "Eres muy malo tio" << endl;
+		}
+		if (cincuenta == 1) {
+			cout << "Has conseguido 50 puntos en una partida" << endl;
+		}
+		else if (cincuenta == 0) {
+			cout << "Como no has conseguido 50 puntos?" << endl;
+		}
+		if (cien == 1) {
+			cout << "Has conseguido 100 puntos" << endl;
+		}
+		else if (cien == 0) {
+			cout << "Tienes que mejorar, no has conseguido 100 puntos" << endl;
+		}
+		if (medio == 1) {
+			cout << "O dios mio no te han comigo en 60 segundos" << endl;
+		}
+		else if (medio == 0) {
+			cout << "No has durado ni 60 segundos" << endl;
+		}
+		if (entero == 1) {
+			cout << "Guau, has durado 120 segundos son morir" << endl;
+		}
+		else if (entero == 0) {
+			cout << "Aun te falta, no has durado 120 segundos" << endl;
+		}
+
 	}
 	shutdown(sock, 1);
 	closesocket(sock);
