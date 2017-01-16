@@ -638,6 +638,7 @@ void cliente(timer t, int *a) {
 	string total;
 	if (*a == 1) {
 		achiv(t);
+		system("cls");
 		cout << "Escribe tu nombre para registrar tu ranking: " << endl;
 		string name;
 		cin >> name;
@@ -675,7 +676,7 @@ void cliente(timer t, int *a) {
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
-	getaddrinfo("192.168.1.39", "4539", &hints, &addr);
+	getaddrinfo("192.168.123.51", "4539", &hints, &addr);
 
 	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	connect(sock, addr->ai_addr, addr->ai_addrlen);
@@ -687,7 +688,7 @@ void cliente(timer t, int *a) {
 		int i = recv(sock, mes, 512, 0);
 		mes[i - 1] = '\0';
 		CutTheRopePlay(mes, punts, record);
-		cout << punts << endl;
+		cout << "Puntos" << punts << endl;
 		if (record == 1) {
 			cout << "Tienes un nuevo record champion" << endl;
 		}
@@ -706,10 +707,10 @@ void cliente(timer t, int *a) {
 		int i = recv(sock, mes, 512, 0);
 		mes[i - 1] = '\0';
 		CutTheRopeAchi(mes, fail, cincuenta, cien, medio, entero);
-		if (fail == 1) {
+		if (fail == 0) {
 			cout << "Has conseguido no morir con 0 puntos, eres mejor que un bebe" << endl;
 		}
-		else if (fail == 0) {
+		else if (fail == 1) {
 			cout << "Eres muy malo tio" << endl;
 		}
 		if (cincuenta == 1) {
@@ -743,35 +744,7 @@ void cliente(timer t, int *a) {
 
 	WSACleanup();
 }
-/*void clienteMenu(int *a) {		
-	cout << "Escribe tu nombre para registrarte y saber tu ranking" << endl;
-	string name;
-	cin >> name;
-	char bufer[10];
-	_itoa_s(*a, bufer, 10);
-	string total = name  + "/" +  bufer;
-	WSAData wsaData;
-	WSAStartup(MAKEWORD(2, 2), &wsaData);
-	struct addrinfo *addr;
-	struct addrinfo hints;
 
-	ZeroMemory(&hints, sizeof(hints));
-
-	hints.ai_family = AF_INET;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_protocol = IPPROTO_TCP;
-
-	getaddrinfo("192.168.1.39", "4539", &hints, &addr);
-
-	SOCKET  sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-	connect(sock, addr->ai_addr, addr->ai_addrlen);
-
-	send(sock, total.data(), total.length() + 1, 0);
-
-	shutdown(sock, 1);
-	closesocket(sock);
-	WSACleanup();
-}*/
 void Menu(int *a) {
 	cout << "Menu Principal" << endl;
 	cout << endl << endl;
@@ -782,6 +755,7 @@ void Menu(int *a) {
 	cout << "4 -- Consultar mis achievements" << endl;
 	cout << "5 -- Salir" << endl;
 	cin >> *a;
+	system("cls");
 }
 void GameLoop(fantasma *f1, fantasma *f2, fantasma *f3, fantasma *f4) {
 	srand(time(NULL));
@@ -833,7 +807,10 @@ void main() {//CLIENTE        ---------->   PORT -> 5219  IP-> 192.168.123.59
 			if (vides == 0) {
 				cliente(t, &a);
 				vides = 1;
-				Menu(&a);
+				system("pause");
+				system("cls");
+				a = 1;
+				//Menu(&a);
 			}
 		}
 		else if (a == 2) {
