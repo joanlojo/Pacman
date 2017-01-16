@@ -149,6 +149,7 @@ void ReadUserFile(std::string userName, int userScore, Player userRanking[], int
 			achiv[i] = stoi(lectura, nullptr, 10);
 		}
 		fEntrada2.close();
+		
 	}
 
 
@@ -172,7 +173,8 @@ void ReadUserFile(std::string userName, int userScore, Player userRanking[], int
 				userRanking[i] = defaultUser;
 			}
 		}
-		WriteUserFile(userRanking, userName, achiv);
+		WriteUserFile(userRanking, userName, achiv2);
+		maxScore = maxScore+ to_string(userScore) + "/1";
 		cout << "<RANKING> <USER> <" << userName << ">" << endl;
 		PrintRanking(userRanking);
 	}
@@ -244,7 +246,7 @@ void CutTheRope(char bufer[], std::string &name, int &score, int achiv[], int &m
 	std::string A[5];
 	std::string tempScore;
 	int i = 0;
-	for (i = 0; i < 20 - 1; i++) {
+	for (i = 0; i < 40 - 1; i++) {
 		if (bufer[i] != '/') {
 			name = name + bufer[i];
 		}
@@ -252,7 +254,7 @@ void CutTheRope(char bufer[], std::string &name, int &score, int achiv[], int &m
 			break;
 		}
 	}
-	for (i = i + 1; i < 20 - 1; i++) {
+	for (i = i + 1; i < 40 - 1; i++) {
 		if (bufer[i] != '/') {
 			type = bufer[i];
 		}
@@ -260,7 +262,7 @@ void CutTheRope(char bufer[], std::string &name, int &score, int achiv[], int &m
 			break;
 		}
 	}
-	for (i = i + 1; i < 20 - 1; i++) {
+	for (i = i + 1; i < 40 - 1; i++) {
 		if (bufer[i] != '/') {
 			tempScore = tempScore + bufer[i];
 		}
@@ -268,7 +270,7 @@ void CutTheRope(char bufer[], std::string &name, int &score, int achiv[], int &m
 			break;
 		}
 	}
-	for (i = i + 1; i < 20 - 1; i++) {
+	for (i = i + 1; i < 40 - 1; i++) {
 		if (bufer[i] != '/') {
 			A[0] = bufer[i];
 		}
@@ -276,7 +278,7 @@ void CutTheRope(char bufer[], std::string &name, int &score, int achiv[], int &m
 			break;
 		}
 	}
-	for (i = i + 1; i < 20 - 1; i++) {
+	for (i = i + 1; i < 40 - 1; i++) {
 		if (bufer[i] != '/') {
 			A[1] = bufer[i];
 		}
@@ -284,7 +286,7 @@ void CutTheRope(char bufer[], std::string &name, int &score, int achiv[], int &m
 			break;
 		}
 	}
-	for (i = i + 1; i < 20 - 1; i++) {
+	for (i = i + 1; i < 40 - 1; i++) {
 		if (bufer[i] != '/') {
 			A[2] = bufer[i];
 		}
@@ -292,7 +294,7 @@ void CutTheRope(char bufer[], std::string &name, int &score, int achiv[], int &m
 			break;
 		}
 	}
-	for (i = i + 1; i < 20 - 1; i++) {
+	for (i = i + 1; i < 40 - 1; i++) {
 		if (bufer[i] != '/') {
 			A[3] = bufer[i];
 		}
@@ -300,7 +302,7 @@ void CutTheRope(char bufer[], std::string &name, int &score, int achiv[], int &m
 			break;
 		}
 	}
-	for (i = i + 1; i < 20 - 1; i++) {
+	for (i = i + 1; i < 40 - 1; i++) {
 		if (bufer[i] != '\0') {
 			A[4] = bufer[i];
 		}
